@@ -1,0 +1,12 @@
+endpoint: https://eu1.prisma.sh/gideon-harmse/just-products/dev
+datamodel: datamodel.prisma
+#secret: pi389xjam2b3pjsd0
+generate:
+  - generator: javascript-client
+    output: ./src/generated/prisma-client/
+  - generator: graphql-schema
+    output: ./src/generated/prisma.graphql
+
+hooks:
+  post-deploy:
+      - prisma generate

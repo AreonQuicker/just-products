@@ -1,0 +1,32 @@
+type User {
+  id: ID! @id
+  name: String!
+  surname: String!
+}
+
+
+type Product {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  itemCode: String!
+  baseItemCode: String!
+  colourCode: String
+  sizeCode: String
+  segments: [ProductSegment] @relation(name: "ProductSegment", onDelete: CASCADE)
+}
+
+type ProductSegment {
+  id: ID! @id
+  code: String!
+  segment: Segment! @relation(name: "SegmentProduct", onDelete: SET_NULL)
+  product: Product! @relation(name: "ProductSegment", onDelete: SET_NULL)
+}
+
+type Segment {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  rule: String!  
+  products: [ProductSegment] @relation(name: "SegmentProduct", onDelete: CASCADE)
+}
